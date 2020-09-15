@@ -1,7 +1,8 @@
 import * as Yup from 'yup';
 import User from '../models/User';
 
-import Mail from '../../lib/Mail';
+import UpdateUser from '../jobs/UpdateUser';
+import Queue from '../../lib/Queue';
 
 class UserController {
   async store(req, res) {
@@ -72,10 +73,8 @@ class UserController {
 
     const { id, name, access_level } = await user.update(req.body);
 
-    await Mail.sendMail({
-      to: 'Ouvidoria <ouvidoria@clubearamacan.com.br>',
-      subject: 'Usuário atualizado',
-      text: 'Um usuário foi atualizado',
+    await Queue.add(UpdateUser.key, {
+      name,
     });
 
     return res.json({ id, name, email, access_level });
