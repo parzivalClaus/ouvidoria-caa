@@ -3,15 +3,53 @@ import Faq from '../models/Faq';
 
 class FaqController {
   async index(req, res) {
-    return res.json();
+    try {
+      const result = await Faq.findAndCountAll();
+
+      return res.json(result);
+    } catch (err) {
+      return res.json(err);
+    }
   }
 
   async store(req, res) {
-    return res.json();
+    const schema = Yup.object().shape({
+      question: Yup.string().required(),
+      answer: Yup.string().required(),
+      category: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res
+        .status(400)
+        .json({ error: 'Erro nos dados, por favor confira todos os campos' });
+    }
+
+    try {
+      const result = await Faq.create(req.body);
+
+      return res.json(result);
+    } catch (err) {
+      return res.json(err);
+    }
   }
 
   async update(req, res) {
-    return res.json();
+    try {
+      const { faqId } = req.params;
+
+      const faq = await Faq.findByPk(faqId);
+
+      if (!faq) {
+        return res.status(400).json({ error: 'FAQ não localizado.' });
+      }
+
+      const { question, answer, category } = await faq.update(req.body);
+
+      return res.json({ question, answer, category });
+    } catch (err) {
+      return res.json(err);
+    }
   }
 }
 
