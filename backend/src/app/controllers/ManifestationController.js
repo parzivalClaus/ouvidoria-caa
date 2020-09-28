@@ -14,7 +14,7 @@ class ManifestationController {
           where: {
             protocol: questionProtocol,
           },
-          attributes: ['id', 'protocol', 'message', 'category'],
+          attributes: ['id', 'protocol', 'message', 'category', 'closed'],
           include: [
             {
               model: User,
@@ -34,7 +34,7 @@ class ManifestationController {
         closed: { [Op.iLike]: `%${closed}%` },
         type: 'question',
       },
-      attributes: ['id', 'protocol', 'message', 'category'],
+      attributes: ['id', 'protocol', 'message', 'category', 'closed'],
       include: [
         {
           model: User,
