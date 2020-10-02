@@ -8,6 +8,14 @@ justify-content: center;
 align-items: center;
 height: 100%;
 background: #555555;
+
+p {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
 `;
 
 export const StyledForm = styled(Form)`
@@ -68,6 +76,20 @@ padding: 80px 0;
 
         &:hover {
           color: #fff;
+        }
+      }
+
+      a.btnLogin {
+        background: #EF1414;
+        text-align: center;
+        color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        margin-top: 10px;
+
+        &:hover {
+          background: ${darken(0.07, '#Ef1414')};
         }
       }
   }

@@ -10,16 +10,29 @@ class UserController {
       name: Yup.string().required(),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(6),
+      confirmPassword: Yup.string().required().min(6),
     });
 
+    const { password, confirmPassword } = req.body;
+
+    if (password !== confirmPassword) {
+      return res
+        .status(400)
+        .json({ error: 'As senhas digitadas não conferem' });
+    }
+
     if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
+      return res
+        .status(400)
+        .json({ error: 'Erro de validação, confira seus dados' });
     }
 
     const userExists = await User.findOne({ where: { email: req.body.email } });
 
     if (userExists) {
-      return res.status(400).json({ error: 'User already exists.' });
+      return res
+        .status(400)
+        .json({ error: 'Um usuário com este e-mail já existe' });
     }
 
     try {

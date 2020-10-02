@@ -23,7 +23,7 @@ export function* signIn({ payload }) {
 
     history.push('/user-dashboard');
   } catch (err) {
-    toast.warning(err.response.data.error);
+    toast.error(err.response.data.error);
 
     yield put(signFailure());
   }

@@ -25,6 +25,10 @@ module.exports = {
         defaultValue: 0,
         allowNull: false,
       },
+      recovery_pass_code: {
+        type: Sequelize.STRING,
+        defaultValue: null,
+      },
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,

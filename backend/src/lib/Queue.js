@@ -1,8 +1,10 @@
 import Bee from 'bee-queue';
 import UpdateUser from '../app/jobs/UpdateUser';
+import RecoveryPassCode from '../app/jobs/RecoveryPassCode';
+import NewPass from '../app/jobs/NewPass';
 import redisConfig from '../config/redis';
 
-const jobs = [UpdateUser];
+const jobs = [UpdateUser, RecoveryPassCode, NewPass];
 
 class Queue {
   constructor() {

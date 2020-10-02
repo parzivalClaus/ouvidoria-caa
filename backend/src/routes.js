@@ -4,6 +4,7 @@ import ManifestationController from './app/controllers/ManifestationController';
 import AnswerController from './app/controllers/AnswerController';
 import CloseManifestationController from './app/controllers/CloseManifestationController';
 import FaqController from './app/controllers/FaqController';
+import RecoveryPassController from './app/controllers/RecoveryPassController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -16,6 +17,12 @@ routes.post('/users', UserController.store);
 
 // Create session
 routes.post('/sessions', SessionController.store);
+
+// Recovery Pass
+routes.post('/recovery-pass', RecoveryPassController.store);
+
+// Generate New Pass
+routes.get('/recovery-pass', RecoveryPassController.index);
 
 routes.use(authMiddleware);
 

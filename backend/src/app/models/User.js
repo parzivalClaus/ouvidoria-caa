@@ -10,6 +10,7 @@ class User extends Model {
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         access_level: Sequelize.INTEGER,
+        recovery_pass_code: Sequelize.STRING,
       },
       {
         sequelize,
