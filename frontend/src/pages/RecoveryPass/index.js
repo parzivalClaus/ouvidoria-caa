@@ -54,7 +54,7 @@ export default function RecoveryPass(props) {
 
   useEffect(() => {
     if (!email && !activeCode) {
-      return null;
+      return;
     }
 
     newPass();
@@ -76,8 +76,6 @@ export default function RecoveryPass(props) {
               <Input name="email" type="email" placeholder="E-mail" />
 
               <button type="submit">{loading ? 'Carregando...' : 'ENVIAR'}</button>
-
-
 
               <NavLink
                 id="login"

@@ -5,6 +5,8 @@ import Route from './Route';
 import Login from "~/pages/Login";
 import Register from '~/pages/Register';
 import RecoveryPass from '~/pages/RecoveryPass';
+import UserDashboard from '~/pages/UserDashboard';
+import CreateManifestation from '~/pages/CreateManifestation';
 
 export default function Routes() {
   return (
@@ -13,7 +15,8 @@ export default function Routes() {
       <Route path="/register" exact component={Register} />
       <Route path="/recovery-pass" exact component={RecoveryPass} />
 
-      <Route path="/user-dashboard" exact isPrivate />
+      <Route path="/user-dashboard" exact component={UserDashboard} isPrivate />
+      <Route path="/create-manifestation" exact component={CreateManifestation} isPrivate />
     </Switch>
   );
 }

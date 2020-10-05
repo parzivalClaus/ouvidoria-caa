@@ -30,11 +30,11 @@ export default function Login() {
   return (
     <Container>
       <StyledForm schema={schema} onSubmit={handleSubmit}>
-        <div class="formContainer">
-          <div class="inputBox">
+        <div className="formContainer">
+          <div className="inputBox">
           </div>
           <Input name="email" type="email" placeholder="E-mail" />
-          <div class="inputBox">
+          <div className="inputBox">
           </div>
           <Input name="password" type="password" placeholder="Senha" />
 
@@ -49,7 +49,7 @@ export default function Login() {
 
           <NavLink
             id="recoveryPass"
-            to="/recovery-pass/"
+            to="/recovery-pass"
           >
             Recuperar senha
             </NavLink>
