@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import api from '~/services/api';
+import history from '~/services/history';
+
 import Header from '~/components/Header';
 
 import { MdArrowBack } from 'react-icons/md';
@@ -10,6 +13,7 @@ import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
 
 import { Container, Content, StyledForm } from './styles';
+import { toast } from 'react-toastify';
 
 const schema = Yup.object().shape({
   title: Yup.string()
@@ -18,11 +22,24 @@ const schema = Yup.object().shape({
     .required('A mensagem é obrigatória'),
 });
 
-function CreateManifestation() {
+function CreateManifestation(props) {
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit() {
+  async function handleSubmit(data, { resetForm }) {
+    const { title, message } = data;
+    const category = new URLSearchParams(props.location.search).get("category");
 
+    try {
+      await api.post('/manifestation', { type: 'question', title, message, category });
+
+      resetForm();
+
+      history.push('/');
+
+      toast.success('Sua manifestação foi registrada com sucesso. O número de protocolo foi encaminhado para o e-mail de cadastro.');
+    } catch (err) {
+      return toast.error(err.response.data.error);
+    }
   }
 
   return (

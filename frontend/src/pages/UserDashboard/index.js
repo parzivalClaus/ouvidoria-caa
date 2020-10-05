@@ -24,7 +24,7 @@ function UserDashboard() {
 
             <NavLink
               id="ouvidoria"
-              to="/create-manifestation?category=ouvidoria"
+              to="/create-manifestation?category=Ouvidoria"
             >
               <div class="category-image"></div>
               <span>Ouvidoria</span></NavLink>
@@ -34,7 +34,7 @@ function UserDashboard() {
 
             <NavLink
               id="social"
-              to="/create-manifestation?category=social"
+              to="/create-manifestation?category=Social"
             >
               <div class="category-image"></div>
               <span>Social</span></NavLink>
@@ -43,7 +43,7 @@ function UserDashboard() {
           <div className="category">
             <NavLink
               id="esportes"
-              to="/create-manifestation?category=esportes"
+              to="/create-manifestation?category=Esportes"
             >
               <div class="category-image"></div>
 
@@ -53,7 +53,7 @@ function UserDashboard() {
           <div className="category">
             <NavLink
               id="financeiro"
-              to="/create-manifestation?category=financeiro"
+              to="/create-manifestation?category=Financeiro"
             >
               <div class="category-image"></div>
 
@@ -63,7 +63,7 @@ function UserDashboard() {
           <div className="category">
             <NavLink
               id="tecnologia"
-              to="/create-manifestation?category=tecnologia"
+              to="/create-manifestation?category=Tecnologia"
             >
               <div class="category-image"></div>
 
