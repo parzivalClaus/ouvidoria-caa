@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { formatRelative, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
+import { useSelector } from 'react-redux';
+
 import Header from '~/components/Header';
 
 import { MdArrowBack, MdDone, MdSubject } from 'react-icons/md';
@@ -11,6 +13,7 @@ import { NavLink } from 'react-router-dom';
 
 import { Input } from '@rocketseat/unform';
 
+import history from '~/services/history';
 import api from '~/services/api';
 
 import { Container, Content, Filters, List, FiltersBox, SearchBox, ManifestationBox, Title, ContentLine } from './styles';
@@ -21,7 +24,8 @@ function Manifestations() {
   const [q, setQ] = useState('');
   const [closed, setClosed] = useState('');
   const [manifestations, setManifestations] = useState([]);
-  const [answersCount, setAnswersCounts] = useState();
+  const userId = useSelector((state) => state.user.profile.id);
+
 
   useEffect(() => {
 
@@ -29,7 +33,7 @@ function Manifestations() {
     async function loadManifestations() {
       try {
 
-        const allManifestations = await api.get(`/manifestation`, { params: { closed, q } });
+        const allManifestations = await api.get(`/manifestation`, { params: { closed, q, id: userId } });
 
         const questions = allManifestations.data.rows.filter(
           question => question.type === 'question'
@@ -102,7 +106,12 @@ Voltar
         <List>
 
           {manifestations && manifestations.map(manifestation => (
-            <ManifestationBox>
+
+            <ManifestationBox onClick={() =>
+              history.push(`/manifestation/${manifestation.protocol}`, {
+                manifestation,
+              })
+            }>
               <Title>
                 <strong>Status</strong>
                 <strong>Manifestação</strong>

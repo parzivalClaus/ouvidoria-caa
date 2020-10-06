@@ -101,6 +101,11 @@ background: #fff;
 border-radius: 4px;
 padding: 25px;
 margin-bottom: 30px;
+
+&:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
 `;
 
 export const Title = styled.div`

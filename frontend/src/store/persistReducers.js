@@ -7,7 +7,7 @@ export default (reducers) => {
     {
       key: 'ouvidoriacaa',
       storage,
-      whitelist: ['auth'],
+      whitelist: ['auth', 'user'],
     },
     reducers
   );

@@ -26,6 +26,7 @@ function CreateManifestation(props) {
   const [loading, setLoading] = useState(false);
 
   async function handleSubmit(data, { resetForm }) {
+    setLoading(true);
     const { title, message } = data;
     const category = new URLSearchParams(props.location.search).get("category");
 
@@ -34,10 +35,13 @@ function CreateManifestation(props) {
 
       resetForm();
 
+      setLoading(false);
+
       history.push('/');
 
       toast.success('Sua manifestação foi registrada com sucesso. O número de protocolo foi encaminhado para o e-mail de cadastro.');
     } catch (err) {
+      setLoading(false);
       return toast.error(err.response.data.error);
     }
   }
