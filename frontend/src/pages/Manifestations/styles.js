@@ -14,6 +14,24 @@ export const Content = styled.div`
 flex: 1;
 width: 1300px;
 margin: 30px auto;
+
+span.back-button {
+  display: block;
+
+  a {
+    font-size: 17px;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+  align-items: center;
+  padding: 10px 0px;
+  margin-bottom: 20px;
+
+  svg {
+    margin-right: 5px;
+  }
+  }
+}
 `;
 
 export const Filters = styled.div`
@@ -98,4 +116,25 @@ grid-template-columns: 10% 40% 20% 15% 15%;
 font-size: 16px;
 color: #959191;
 padding: 5px 0;
+align-items: center;
+
+.iconStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.doneStatus {
+color: #fff;
+background: #5BC927;
+}
+
+.openStatus {
+color: #fff;
+background: #FFDF34;
+}
 `;

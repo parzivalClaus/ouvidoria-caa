@@ -3,10 +3,16 @@ import { Op } from 'sequelize';
 import Manifestation from '../models/Manifestation';
 import User from '../models/User';
 
+import CreateManifestation from '../jobs/CreateManifestation';
+import Queue from '../../lib/Queue';
+
 class ManifestationController {
   async index(req, res) {
     const { closed } = req.query || '';
+    const { q, id } = req.query;
     const { questionProtocol } = req.params;
+    const title = q || '';
+    const creatorId = id || '';
 
     if (questionProtocol) {
       try {
@@ -14,7 +20,15 @@ class ManifestationController {
           where: {
             protocol: questionProtocol,
           },
-          attributes: ['id', 'protocol', 'message', 'category', 'closed'],
+          attributes: [
+            'id',
+            'protocol',
+            'title',
+            'message',
+            'category',
+            'closed',
+            'created_at',
+          ],
           include: [
             {
               model: User,
@@ -29,12 +43,51 @@ class ManifestationController {
       }
     }
 
+    if (creatorId) {
+      const manifestations = await Manifestation.findAndCountAll({
+        where: {
+          closed: { [Op.iLike]: `%${closed}%` },
+          title: { [Op.iLike]: `%${title}%` },
+          creator_id: creatorId,
+        },
+        attributes: [
+          'id',
+          'protocol',
+          'title',
+          'message',
+          'category',
+          'closed',
+          'type',
+          'creator_id',
+          'created_at',
+        ],
+        include: [
+          {
+            model: User,
+            as: 'creator',
+            attributes: ['name', 'email'],
+          },
+        ],
+      });
+      return res.json(manifestations);
+    }
+
     const manifestations = await Manifestation.findAndCountAll({
       where: {
         closed: { [Op.iLike]: `%${closed}%` },
-        type: 'question',
+        title: { [Op.iLike]: `%${title}%` },
       },
-      attributes: ['id', 'protocol', 'message', 'category', 'closed'],
+      attributes: [
+        'id',
+        'protocol',
+        'title',
+        'message',
+        'category',
+        'closed',
+        'type',
+        'creator_id',
+        'created_at',
+      ],
       include: [
         {
           model: User,
@@ -50,6 +103,7 @@ class ManifestationController {
     const schema = Yup.object().shape({
       type: Yup.string().required(),
       category: Yup.string().required(),
+      title: Yup.string().required(),
       message: Yup.string().required(),
     });
 
@@ -61,14 +115,25 @@ class ManifestationController {
 
     try {
       const creatorId = req.userId;
-      const { type, message, category } = req.body;
+      const { type, title, message, category } = req.body;
 
       const result = await Manifestation.create({
         creator_id: creatorId,
         type,
+        title,
         message,
         category,
         closed: 'false',
+      });
+
+      const { name, email } = await User.findByPk(creatorId);
+
+      const { protocol } = result;
+
+      await Queue.add(CreateManifestation.key, {
+        protocol,
+        name,
+        email,
       });
 
       return res.json(result);

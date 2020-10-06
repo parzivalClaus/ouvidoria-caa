@@ -12,7 +12,7 @@ class AnswerController {
           protocol: questionProtocol,
           type: 'answer',
         },
-        attributes: ['id', 'message'],
+        attributes: ['id', 'title', 'message'],
         include: [
           {
             model: User,
@@ -50,15 +50,16 @@ class AnswerController {
 
     try {
       const creatorId = req.userId;
-      const { message } = req.body;
+      const { title, message } = req.body;
 
       const result = await Manifestation.create({
         creator_id: creatorId,
         type: 'answer',
+        title,
         message,
         protocol: question.protocol,
         category: question.category,
-        closed: null,
+        closed: false,
       });
 
       return res.json(result);

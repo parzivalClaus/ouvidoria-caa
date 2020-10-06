@@ -8,6 +8,7 @@ class Manifestation extends Model {
         protocol: Sequelize.STRING,
         type: Sequelize.STRING,
         creator_id: Sequelize.INTEGER,
+        title: Sequelize.STRING,
         message: Sequelize.STRING,
         closed: Sequelize.STRING,
         category: Sequelize.STRING,
