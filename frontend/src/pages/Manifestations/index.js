@@ -35,29 +35,12 @@ function Manifestations() {
 
         const allManifestations = await api.get(`/manifestation`, { params: { closed, q, id: userId } });
 
-        const questions = allManifestations.data.rows.filter(
-          question => question.type === 'question'
-        );
+        const data = allManifestations.data.rows.map(question => ({
+          ...question,
+          created: formatRelative(parseISO(question.created_at), new Date(), { locale: pt }),
+        }));
 
-        const answers = allManifestations.data.rows.filter(
-          answer => answer.type === 'answer'
-        );
-
-        const questionsWithAnswers = questions.map(question => {
-          const counter = answers.filter(answer => answer.protocol === question.protocol).length;
-
-          const lastReply = counter > 0 ? answers.reduce((a, b) => (a.created_at > b.created_at ? a.created_at : b.created_at)) : null;
-          const formatedDate = counter > 0 ? formatRelative(parseISO(lastReply), new Date(), { locale: pt }) : '-';
-
-          return {
-            ...question,
-            answers: counter,
-            lastReply: formatedDate,
-          }
-        });
-
-
-        setManifestations(questionsWithAnswers);
+        setManifestations(data);
 
       } catch (err) {
         return toast.error(err.response.data.error);
@@ -116,16 +99,14 @@ Voltar
                 <strong>Status</strong>
                 <strong>Manifestação</strong>
                 <strong>Setor</strong>
-                <strong>Respostas</strong>
-                <strong>Última resposta</strong>
+                <strong>Data da Manifestação</strong>
               </Title>
               <ContentLine>
                 <p>{manifestation.closed === 'true' ? <div className="iconStatus doneStatus"><MdDone size={25} color="#fff" /></div>
                   : <div className="iconStatus openStatus"><MdSubject size={25} color="#333" /></div>}</p>
                 <p>{manifestation.title}</p>
                 <p>{manifestation.category}</p>
-                <p>{manifestation.answers}</p>
-                <p>{manifestation.lastReply}</p>
+                <p>{manifestation.created}</p>
               </ContentLine>
             </ManifestationBox>
           ))}

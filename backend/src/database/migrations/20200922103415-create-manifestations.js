@@ -27,7 +27,7 @@ module.exports = {
         allowNull: false,
       },
       message: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(1000),
         allowNull: false,
       },
       closed: {

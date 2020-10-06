@@ -55,32 +55,9 @@ export const CategoryBox = styled.div`
 
 export const BottomBox = styled.div`
 display: flex;
-justify-content: space-between;
+justify-content: flex-end;
 align-items: center;
 flex: 1;
-
-div.search {
-  background: #fff;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  svg {
-    background-color: #DF2222;
-    padding: 8px 15px;
-    box-sizing: content-box;
-    border-radius: 4px 0px 0px 4px;
-  }
-
-  input {
-    border: 0px;
-    padding: 0 20px;
-    color: #333;
-    font-size: 20px;
-  }
-}
 
 button {
   background-color: #DF2222;

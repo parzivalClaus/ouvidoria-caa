@@ -49,6 +49,7 @@ class ManifestationController {
           closed: { [Op.iLike]: `%${closed}%` },
           title: { [Op.iLike]: `%${title}%` },
           creator_id: creatorId,
+          type: 'question',
         },
         attributes: [
           'id',
@@ -76,6 +77,7 @@ class ManifestationController {
       where: {
         closed: { [Op.iLike]: `%${closed}%` },
         title: { [Op.iLike]: `%${title}%` },
+        type: 'question',
       },
       attributes: [
         'id',

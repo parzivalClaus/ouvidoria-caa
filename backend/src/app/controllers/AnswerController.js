@@ -12,7 +12,7 @@ class AnswerController {
           protocol: questionProtocol,
           type: 'answer',
         },
-        attributes: ['id', 'title', 'message', 'created_at'],
+        attributes: ['id', 'title', 'message', 'creator_id', 'created_at'],
         include: [
           {
             model: User,

@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import Header from '~/components/Header';
 
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import history from '~/services/history';
 
 import { Input } from '@rocketseat/unform';
 
@@ -14,6 +17,8 @@ import {
 
 function UserDashboard() {
   const [q, setQ] = useState('');
+
+
 
   return (
     <Container>
@@ -73,18 +78,6 @@ function UserDashboard() {
         </CategoryBox>
 
         <BottomBox>
-          <div className="search">
-            <MdSearch size={40} color="#fff" />
-
-            <Input
-              name="search"
-              type="text"
-              placeholder="Consulte sua manifestação"
-              value={q}
-              onChange={e => setQ(e.target.value)}
-            />
-          </div>
-
           <button onClick={() => { }}><span>? </span> Perguntas Frequentes</button>
         </BottomBox>
       </Content>

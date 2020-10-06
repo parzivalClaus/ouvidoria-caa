@@ -110,14 +110,14 @@ margin-bottom: 30px;
 
 export const Title = styled.div`
 display: grid;
-grid-template-columns: 10% 40% 20% 15% 15%;
+grid-template-columns: 10% 50% 20% 20%;
 font-size: 16px;
 padding: 0px 0 20px 0;
 `;
 
 export const ContentLine = styled.div`
 display: grid;
-grid-template-columns: 10% 40% 20% 15% 15%;
+grid-template-columns: 10% 50% 20% 20%;
 font-size: 16px;
 color: #959191;
 padding: 5px 0;
