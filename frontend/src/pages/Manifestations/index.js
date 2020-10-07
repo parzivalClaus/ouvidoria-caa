@@ -48,7 +48,7 @@ function Manifestations() {
     }
 
     loadManifestations();
-  }, [closed, q]);
+  }, [closed, q, userId]);
 
   return (
     <Container>

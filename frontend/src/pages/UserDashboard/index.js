@@ -1,24 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Header from '~/components/Header';
 
 import { NavLink } from 'react-router-dom';
-import { toast } from 'react-toastify';
-
-import history from '~/services/history';
-
-import { Input } from '@rocketseat/unform';
 
 import { Container, Content, CategoryBox, BottomBox } from './styles';
 
-import {
-  MdSearch
-} from 'react-icons/md';
+
 
 function UserDashboard() {
-  const [q, setQ] = useState('');
-
-
 
   return (
     <Container>

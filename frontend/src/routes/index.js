@@ -9,6 +9,7 @@ import UserDashboard from '~/pages/UserDashboard';
 import CreateManifestation from '~/pages/CreateManifestation';
 import Manifestations from '~/pages/Manifestations';
 import FullManifestation from '~/pages/FullManifestation';
+import Profile from '~/pages/Profile';
 
 export default function Routes() {
   return (
@@ -21,6 +22,7 @@ export default function Routes() {
       <Route path="/create-manifestation" exact component={CreateManifestation} isPrivate />
       <Route path="/manifestations" exact component={Manifestations} isPrivate />
       <Route path="/manifestation/:questionProtocol" exact component={FullManifestation} isPrivate />
+      <Route path="/profile" exact component={Profile} isPrivate />
     </Switch>
   );
 }
