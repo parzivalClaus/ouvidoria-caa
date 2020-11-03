@@ -11,6 +11,8 @@ import Manifestations from '~/pages/Manifestations';
 import FullManifestation from '~/pages/FullManifestation';
 import Profile from '~/pages/Profile';
 
+import SectorDashboard from '~/pages/SectorDashboard';
+
 export default function Routes() {
   return (
     <Switch>
@@ -23,6 +25,8 @@ export default function Routes() {
       <Route path="/manifestations" exact component={Manifestations} isPrivate />
       <Route path="/manifestation/:questionProtocol" exact component={FullManifestation} isPrivate />
       <Route path="/profile" exact component={Profile} isPrivate />
+
+      <Route path="/sector-dashboard" exact component={SectorDashboard} isPrivate isSector />
     </Switch>
   );
 }

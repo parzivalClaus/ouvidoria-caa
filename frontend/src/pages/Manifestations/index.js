@@ -16,6 +16,8 @@ import { Input } from '@rocketseat/unform';
 import history from '~/services/history';
 import api from '~/services/api';
 
+import { store } from '~/store';
+
 import { Container, Content, Filters, List, FiltersBox, SearchBox, ManifestationBox, Title, ContentLine } from './styles';
 
 import { toast } from 'react-toastify';
@@ -25,6 +27,7 @@ function Manifestations() {
   const [closed, setClosed] = useState('');
   const [manifestations, setManifestations] = useState([]);
   const userId = useSelector((state) => state.user.profile.id);
+  const { name, access_level } = store.getState().user.profile;
 
 
   useEffect(() => {
@@ -32,6 +35,20 @@ function Manifestations() {
 
     async function loadManifestations() {
       try {
+        if (access_level === 1) {
+          const allManifestations = await api.get(`/manifestation`, { params: { closed, q, category: name } });
+          //const allManifestations = await api.get(`/manifestation`, { params: { closed, q, id: userId } });
+          console.tron.log(allManifestations.data.rows);
+
+          const data = allManifestations.data.rows.map(question => ({
+            ...question,
+            created: formatRelative(parseISO(question.created_at), new Date(), { locale: pt }),
+          }));
+
+          setManifestations(data);
+
+          return;
+        }
 
         const allManifestations = await api.get(`/manifestation`, { params: { closed, q, id: userId } });
 

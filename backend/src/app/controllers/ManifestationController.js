@@ -11,6 +11,7 @@ class ManifestationController {
     const { closed } = req.query || '';
     const { q, id } = req.query;
     const { questionProtocol } = req.params;
+    const { category } = req.query;
     const title = q || '';
     const creatorId = id || '';
 
@@ -77,6 +78,7 @@ class ManifestationController {
       where: {
         closed: { [Op.iLike]: `%${closed}%` },
         title: { [Op.iLike]: `%${title}%` },
+        category,
         type: 'question',
       },
       attributes: [
@@ -98,6 +100,7 @@ class ManifestationController {
         },
       ],
     });
+
     return res.json(manifestations);
   }
 
