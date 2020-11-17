@@ -6,6 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import { Container, Content, CategoryBox, BottomBox } from './styles';
 
+import history from '~/services/history';
 
 
 function UserDashboard() {
@@ -68,7 +69,7 @@ function UserDashboard() {
         </CategoryBox>
 
         <BottomBox>
-          <button onClick={() => { }}><span>? </span> Perguntas Frequentes</button>
+          <button onClick={() => history.push('faqs')}><span>? </span> Perguntas Frequentes</button>
         </BottomBox>
       </Content>
     </Container>

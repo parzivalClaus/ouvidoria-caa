@@ -12,7 +12,8 @@ import { Container, Wrapper, Logo, User } from './styles';
 
 function Header() {
   const dispatch = useDispatch();
-  const { name } = store.getState().user.profile;
+  const { name, access_level } = store.getState().user.profile;
+
 
   function handleSignOut() {
     dispatch(signOut());
@@ -22,25 +23,42 @@ function Header() {
     <Container>
       <Wrapper>
         <Logo>OUVIDORIA</Logo>
-        <User>{name}
+        <User access_level={access_level}>{name}
 
           <div className="user-submenu">
-            <NavLink
-              id="profile"
-              to="/profile"
-            >
-              Meu perfil
+
+            {access_level === 0 ? (
+              <>
+                <NavLink
+                  id="profile"
+                  to="/profile"
+                >
+                  Meu perfil
             </NavLink>
 
-            <NavLink
-              id="manifestations"
-              to="/manifestations"
-            >
-              Minhas manifestações
+                <NavLink
+                  id="manifestations"
+                  to="/manifestations"
+                >
+                  Minhas manifestações
             </NavLink>
+              </>
+            ) : null}
+
+            {access_level === 1 ? (
+              <NavLink
+                id="faq"
+                to="/faqs"
+              >
+                Perguntas Frequentes (FAQ)
+              </NavLink>
+            ) : null}
+
 
             <button onClick={handleSignOut}>Sair da ouvidoria</button>
           </div>
+
+
         </User>
       </Wrapper>
     </Container>

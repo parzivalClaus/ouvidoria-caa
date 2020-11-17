@@ -37,8 +37,6 @@ function Manifestations() {
       try {
         if (access_level === 1) {
           const allManifestations = await api.get(`/manifestation`, { params: { closed, q, category: name } });
-          //const allManifestations = await api.get(`/manifestation`, { params: { closed, q, id: userId } });
-          console.tron.log(allManifestations.data.rows);
 
           const data = allManifestations.data.rows.map(question => ({
             ...question,
@@ -65,24 +63,28 @@ function Manifestations() {
     }
 
     loadManifestations();
-  }, [closed, q, userId]);
+  }, [closed, q, userId, name, access_level]);
 
   return (
     <Container>
       <Header />
       <Content>
 
-        <span className="back-button">
+        {!(access_level !== 0) ? (
+          <span className="back-button">
 
-          <NavLink
-            id="userDashboard"
-            to="/user-dashboard"
-          >
-            <MdArrowBack size={35} color="#333" />
+            <NavLink
+              id="userDashboard"
+              to="/user-dashboard"
+            >
+              <MdArrowBack size={35} color="#333" />
 
 Voltar
 </NavLink>
-        </span>
+          </span>
+        ) : null}
+
+
 
         <Filters>
 

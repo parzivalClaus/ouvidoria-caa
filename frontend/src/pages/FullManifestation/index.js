@@ -5,6 +5,7 @@ import pt from 'date-fns/locale/pt';
 
 import history from '~/services/history';
 import api from '~/services/api';
+import { store } from '~/store';
 
 import { NavLink } from 'react-router-dom';
 
@@ -27,6 +28,7 @@ function FullManifestation({ history: navigation }) {
   const { manifestation } = navigation.location.state;
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { access_level } = store.getState().user.profile;
 
   async function handleResolved() {
     try {
@@ -84,7 +86,7 @@ Voltar
 
         <Title>
           <h1>{manifestation.closed === 'true' ? <strong>[Resolvido] </strong> : null}{manifestation.title}</h1>
-          {manifestation.closed !== 'true' ?
+          {manifestation.closed !== 'true' && access_level === 0 ?
             <button onClick={handleResolved}>Marcar como resolvido</button>
             : null}
 
