@@ -16,6 +16,13 @@ flex: 1;
 width: 1300px;
 margin: 30px auto;
 
+.top-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
 span.back-button {
   display: block;
 
@@ -25,8 +32,7 @@ span.back-button {
     font-weight: bold;
     display: flex;
   align-items: center;
-  padding: 10px 0px;
-  margin-bottom: 20px;
+  padding: 0px 0px;
 
   svg {
     margin-right: 5px;

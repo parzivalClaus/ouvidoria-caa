@@ -31,6 +31,7 @@ padding: 25px 0;
 &:hover .user-submenu {
   display: flex;
   opacity: 1;
+  visibility: visible;
 }
 
 .user-submenu {
@@ -39,6 +40,7 @@ padding: 25px 0;
   display: flex;
   flex-direction: column;
   position: absolute;
+  visibility: hidden;
   background-color: #555;
   padding: 20px;
   font-size: 16px;

@@ -1,10 +1,21 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Faq from '../models/Faq';
 
 class FaqController {
   async index(req, res) {
+    const { q } = req.query;
+    const title = q || '';
+    const { category } = req.query;
+    const cat = category || '';
+
     try {
-      const result = await Faq.findAndCountAll();
+      const result = await Faq.findAndCountAll({
+        where: {
+          question: { [Op.iLike]: `%${title}%` },
+          category: { [Op.iLike]: `%${cat}%` },
+        },
+      });
 
       return res.json(result);
     } catch (err) {

@@ -11,6 +11,7 @@ import { Input } from '@rocketseat/unform';
 
 import { store } from '~/store';
 
+import history from '~/services/history';
 import api from '~/services/api';
 
 function Faqs() {
@@ -49,7 +50,7 @@ function Faqs() {
     <Header />
     <Content>
 
-      {!(access_level !== 0) ? (
+      {!(access_level !== 0) ? (<div className="top-buttons">
         <span className="back-button">
 
           <NavLink
@@ -61,18 +62,23 @@ function Faqs() {
 Voltar
 </NavLink>
         </span>
-      ) : (
-          <span className="back-button">
+      </div>
+      ) : (<div className="top-buttons">
+        <span className="back-button">
 
-            <NavLink
-              id="manifestations"
-              to="/manifestations"
-            >
-              <MdArrowBack size={35} color="#333" />
+          <NavLink
+            id="manifestations"
+            to="/manifestations"
+          >
+            <MdArrowBack size={35} color="#333" />
 
 Voltar
 </NavLink>
-          </span>
+        </span>
+
+        <button onClick={() => history.push('new-faq')}>Adicionar Pergunta</button>
+
+      </div>
         )}
 
 
