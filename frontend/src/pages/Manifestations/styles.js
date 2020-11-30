@@ -43,6 +43,12 @@ align-items: center;
 
 export const List = styled.div`
 margin: 20px 0;
+
+p.noContent {
+  font-size: 20px;
+  margin-top: 45px;
+  font-weight: bold;
+}
 `;
 
 export const FiltersBox = styled.div`

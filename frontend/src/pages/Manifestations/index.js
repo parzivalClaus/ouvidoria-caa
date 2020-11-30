@@ -130,6 +130,10 @@ Voltar
             </ManifestationBox>
           ))}
 
+          {manifestations.length === 0 ? (
+            <p class="noContent">Não há manifestações para exibir.</p>
+          ) : null}
+
 
 
         </List>

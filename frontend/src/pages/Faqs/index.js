@@ -19,6 +19,7 @@ function Faqs() {
   const [category, setCategory] = useState('');
   const [faqs, setFaqs] = useState([]);
   const { access_level } = store.getState().user.profile;
+  const cat = store.getState().user.profile.name;
 
   async function loadFaqs(q) {
     const res = await api.get(`faq`);
@@ -76,7 +77,7 @@ Voltar
 </NavLink>
         </span>
 
-        <button onClick={() => history.push('new-faq')}>Adicionar Pergunta</button>
+        <button onClick={() => history.push(`new-faq?category=${cat}`)}>Adicionar FAQ</button>
 
       </div>
         )}
@@ -124,6 +125,10 @@ Voltar
           </FaqMessage>
         </FaqBox>
       ))}
+
+      {faqs.length === 0 ? (
+        <p class="noContent">Não há perguntas frequentes para exibir.</p>
+      ) : null}
 
 
 

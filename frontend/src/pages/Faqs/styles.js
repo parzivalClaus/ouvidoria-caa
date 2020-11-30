@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { darken } from 'polished';
+
 import AsyncSelect from 'react-select/async';
 
 export const Container = styled.div`
@@ -38,6 +40,27 @@ span.back-button {
     margin-right: 5px;
   }
   }
+}
+
+button {
+  background: #EF1414;
+  padding: 10px 15px;
+  border: 0;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 4px;
+
+  &:hover {
+    background: ${darken(0.07, '#EF1414')};
+  }
+}
+
+p.noContent {
+  font-size: 20px;
+  margin-top: 45px;
+  font-weight: bold;
 }
 `;
 

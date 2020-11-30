@@ -11,6 +11,7 @@ import Manifestations from '~/pages/Manifestations';
 import FullManifestation from '~/pages/FullManifestation';
 import Profile from '~/pages/Profile';
 import Faqs from '~/pages/Faqs';
+import NewFaq from '~/pages/NewFaq';
 
 import SectorDashboard from '~/pages/SectorDashboard';
 
@@ -29,6 +30,7 @@ export default function Routes() {
       <Route path="/faqs" exact component={Faqs} isPrivate />
 
       <Route path="/sector-dashboard" exact component={SectorDashboard} isPrivate isSector />
+      <Route path="/new-faq" exact component={NewFaq} isPrivate isSector />
     </Switch>
   );
 }
