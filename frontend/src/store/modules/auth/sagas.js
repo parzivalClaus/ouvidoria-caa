@@ -21,10 +21,12 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(token, user));
 
-    console.tron.log(user);
-
     if (user.access_level === 1) {
       return history.push('/manifestations');
+    }
+
+    if (user.access_level === 2) {
+      return history.push('/admin-dashboard');
     }
 
     history.push('/user-dashboard');

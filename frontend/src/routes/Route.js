@@ -9,10 +9,12 @@ export default function RouteWrapper({
   component: Component,
   isPrivate,
   isSector,
+  isAdmin,
   ...rest
 }) {
   const { signed } = store.getState().auth;
   const { access_level } = store.getState().user.profile;
+
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
@@ -21,6 +23,10 @@ export default function RouteWrapper({
   if (signed && !isPrivate) {
     if (access_level === 1) {
       return <Redirect to="/manifestations" />;
+    }
+
+    if (access_level === 2) {
+      return <Redirect to="/admin-dashboard" />;
     }
     return <Redirect to="/user-dashboard" />;
   }

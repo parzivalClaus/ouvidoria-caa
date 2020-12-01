@@ -13,6 +13,7 @@ import Profile from '~/pages/Profile';
 import Faqs from '~/pages/Faqs';
 import NewFaq from '~/pages/NewFaq';
 
+import AdminDashboard from '~/pages/AdminDashboard';
 import SectorDashboard from '~/pages/SectorDashboard';
 
 export default function Routes() {
@@ -31,6 +32,8 @@ export default function Routes() {
 
       <Route path="/sector-dashboard" exact component={SectorDashboard} isPrivate isSector />
       <Route path="/new-faq" exact component={NewFaq} isPrivate isSector />
+
+      <Route path="/admin-dashboard" exact component={AdminDashboard} isPrivate isAdmin />
     </Switch>
   );
 }
